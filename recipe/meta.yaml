@@ -7,20 +7,20 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: afba2a4c6fc59b19425dd83ec6285984f2fbe5db105a2634a2cf12216844d5a6
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: python -m pip install . -vv
 
 requirements:
   host:
-    - python >=3.6
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - wasabi >=0.4
     - dill >=0.3.1.1
 
@@ -28,6 +28,7 @@ test:
   requires:
     - pip
     - colorama
+    - python {{ python_min }}
   imports:
     - wrappy
   commands:
